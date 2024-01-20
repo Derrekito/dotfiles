@@ -1,0 +1,35 @@
+import = ["~/.config/alacritty/themes/rose-pine/rose-pine.toml"]
+selection.save_to_clipboard = true
+
+[env]
+TERM = "xterm-256color"
+
+[shell]
+program = "/usr/bin/tmux"
+
+[font]
+
+# Normal text
+normal = { family = "Hack Nerd Font", style = "Regular" }
+
+# Bold text
+bold = { family = "Hack Nerd Font", style = "Bold" }
+
+# Italic text
+italic = { family = "Hack Nerd Font", style = "Italic" }
+
+# Bold and Italic text
+bold_italic = { family = "Hack Nerd Font", style = "Bold Italic" }
+
+# Font size (11.25 is the default size, you can adjust as needed)
+size = 11.25
+
+# Offset (you can adjust as needed)
+offset = { x = 0, y = 0 }
+
+# Glyph offset (you can adjust as needed)
+glyph_offset = { x = 0, y = 0 }
+
+# Builtin box drawing (enable or disable as needed, default is true)
+builtin_box_drawing = true
+

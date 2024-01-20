@@ -1,0 +1,6 @@
+[user]
+	email = Derrekito@users.noreply.github.com
+	name = Derrek Landauer
+[core]
+	editor = nvim
+	excludesfile = ~/.gitignore

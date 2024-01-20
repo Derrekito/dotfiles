@@ -1,0 +1,9 @@
+! xorg font settings
+xft.autohint:  0
+xft.antialias: 1
+xft.hinting:   true
+xft.hintstyle: hintslight
+xft.dpi:       96
+xft.rgba:      rgb
+xft.lcdfilter: lcddefault
+Xft.rgba:      rgb

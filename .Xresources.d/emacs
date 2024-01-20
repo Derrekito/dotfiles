@@ -1,0 +1,8 @@
+! emacs settings ---------------------------------------------------------------
+!emacs.cursorColor:	dark green
+!emacs.fontBackend: 	ttf
+!emacs.font:		Hack-12
+
+! bmp fonts look like shit
+!emacs.font:           	-misc-hack-medium-r-normal-*-*-120-*-*-*-*-*-*
+!emacs.faceName:        hack:style=Regular:Size=120

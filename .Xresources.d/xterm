@@ -1,0 +1,86 @@
+! XTerm -----------------------------------------------------------------------
+
+! Lines of output that you can scroll back over
+XTerm*saveLines: 4096
+XTerm*highlightSelection: true
+
+! Utf8 support
+XTerm*utf8:		true
+XTerm*utf8Fonts: 	true
+XTerm*utf8-mode: 	true
+XTerm*utf8-title: 	true
+
+! fonts
+! use command "xfontsel" to select fonts
+!XTerm*font:           	-misc-hack-medium-r-normal-*-*-*-*-*-m-*-*-*
+XTerm*faceName:       	Hack Nerd Font
+!XTerm*vt100.geometry: 	80x25
+XTerm*faceSize: 12
+!XTerm*renderFont: true
+XTerm.vt100.renderFont: true
+
+! VT Font Menu: 
+XTerm*faceSize1: 8	! Unreadable
+XTerm*faceSize2: 10	! Tiny
+XTerm*faceSize3: 12	! Medium
+XTerm*faceSize4: 16	! Large
+XTerm*faceSize5: 22	! Huge
+
+! meta key fix for Emacs
+XTerm.vt100.metaSendsEscape: true
+XTerm*eightBitInput:	true
+XTerm*eightBitOutput:  	true
+
+! copy and paste
+!XTerm*vt100.Translations:   override\n\
+XTerm*vt100.Translations:  #override\n\
+	Shift Ctrl <KeyPress> v:    insert-selection(CLIPBOARD)\n\
+	Shift Ctrl <KeyPress> c:    copy-selection(CLIPBOARD)\n
+	Shift <Key>Insert: 	    insert-selection(SECONDARY)\n\
+	Ctrl  <Key>Insert:	    copy-selection(SECONDARY)\n
+	Shift Insert:		    insert-selection(SELECT, CUT_BUFFER0) \n\
+
+! clipboard
+XTerm*selectToClipboard: true
+
+! Colors
+XTerm.termName: XTerm-256color
+!vt100*colorMode: on
+!vt100*boldColors: on
+!vt100*dynamicColors: on
+
+XTerm*vt100*colorMode: on
+XTerm*vt100*boldColors: on
+XTerm*vt100*dynamicColors:on
+
+! pointers
+!XTerm*pointerColor:	green
+!XTerm*pointerColor2:	red
+
+! theme settings
+!XTerm*background:	black
+!XTerm*foreground:  	green
+XTerm*colorMode:   	true
+!XTerm*transparent: 	false
+!XTerm*shading:     	80
+
+! colors list
+XTerm*foreground:   #c5c8c6
+XTerm*background:   #1d1f21
+XTerm*cursorColor:  #aeafad
+XTerm*color0:       #000000
+XTerm*color1:       #912226
+XTerm*color2:       #778900
+XTerm*color3:       #ae7b00
+XTerm*color4:       #1d2594
+XTerm*color5:       #682a9b
+XTerm*color6:       #2b6651
+XTerm*color7:       #929593
+XTerm*color8:       #666666
+XTerm*color9:       #cc6666
+XTerm*color10:      #b5bd68
+XTerm*color11:      #f0c674
+XTerm*color12:      #81a2be
+XTerm*color13:      #b294bb
+XTerm*color14:      #8abeb7
+XTerm*color15:      #ecebec

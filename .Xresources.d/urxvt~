@@ -1,0 +1,63 @@
+! urxvt
+URxvt*buffered: true
+URxvt*cursorBlink: true
+URxvt*underlineColor: yellow
+!URxvt*font:  xft:inconsolata:size=10:antialias=true
+#URxvt*font:  xft:Hack Nerd Font:antialias=true
+URxvt*font:  xft:Hack:antialias=true
+URxvt*depth: 32
+URxvt*borderless: 1
+URxvt*scrollBar: false
+URxvt*loginShell: true
+Urxvt*secondaryScroll:  true    # Enable Shift-PageUp/Down in screen
+URxvt*saveLines: 5000
+URxvt*termName: rxvt-unicode
+URxvt.perl-ext-common: default,matcher
+URxvt.urlLauncher: google-chrome
+URxvt.matcher.button: 1
+URxvt.underlineURLs:  true
+URxvt.faceSize: 16
+URxvt.clipboard.autocopy: true
+URxvt.keysym.M-c: perl:clipboard:copy
+URxvt.keysym.M-v: perl:clipboard:paste
+!URxvt.transparent: true
+
+! colors list
+!URxvt*foreground:   #c5c8c6
+!URxvt*background:   #1d1f21
+!URxvt*cursorColor:  #aeafad
+
+!*pointerColorBackground:S_base01
+!*pointerColorForeground:S_base1
+
+!! black dark/light
+!URxvt*color0:       #000000
+!URxvt*color8:       #666666
+
+!! red dark/light
+!URxvt*color1:       #912226
+!URxvt*color9:       #cc6666
+
+!! green dark/light
+!URxvt*color2:       #778900
+!URxvt*color10:      #b5bd68
+
+!! yellow dark/light
+!URxvt*color3:       #ae7b00
+!URxvt*color11:      #f0c674
+
+!! blue dark/light
+!URxvt*color4:       #1d2594
+!URxvt*color12:      #81a2be
+
+!! magenta dark/light
+!URxvt*color5:       #682a9b
+!URxvt*color13:      #b294bb
+
+!! cyan dark/light
+!URxvt*color6:       #2b6651
+!URxvt*color14:      #8abeb7
+
+!! white dark/light
+!URxvt*color7:       #929593
+!URxvt*color15:      #ecebec

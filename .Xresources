@@ -1,0 +1,8 @@
+! xorg settings ---------------------------------------------------------------
+#include ".Xresources.d/tomorrownight"
+#include ".Xresources.d/xterm"
+#include ".Xresources.d/emacs"
+#include ".Xresources.d/xft"
+#include ".Xresources.d/xpdf"
+#include ".Xresources.d/xcursor"
+#include ".Xresources.d/urxvt"
