@@ -33,13 +33,13 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(lua
-     systemd
-     javascript
-     html
+   '(;;lua
+     ;;systemd
+     ;;javascript
+     ;;html
      python
-     csv
-     markdown
+     ;;csv
+     ;;markdown
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
@@ -48,16 +48,16 @@ This function should only modify configuration layer settings."
      ;; auto-completion
      ;; better-defaults
      emacs-lisp
-     git
+     ;;git
      ;;helm
      ivy
-     lsp
-     (python :variables
-             python-backend 'lsp)
-     (c-c++ :variables
-            c-c++-backend 'lsp-clangd)
+     ;;lsp
+     ;;(python :variables
+     ;;        python-backend 'lsp)
+     ;;(c-c++ :variables
+     ;;       c-c++-backend 'lsp-clangd)
      ;; markdown
-     multiple-cursors
+     ;;multiple-cursors
      ;;org
      ;; (shell :variables
      ;;        shell-default-height 30
@@ -76,8 +76,7 @@ This function should only modify configuration layer settings."
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(org-contrib org-pdftools org-bullets visual-fill-column jupyter cuda-mode nov djvu quelpa flycheck-cask flycheck-cstyle dockerfile-mode sqlite3)
-
+   dotspacemacs-additional-packages '(org-contrib org-pdftools org-bullets visual-fill-column jupyter cuda-mode nov djvu quelpa flycheck-cask flycheck-cstyle dockerfile-mode sqlite3 doom-themes)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -250,9 +249,10 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(doom-tomorrow-night
-                         spacemacs-dark
-                         spacemacs-light)
+   ;;dotspacemacs-themes '(doom-city-lights)
+   ;;(load-file "~/.emacs.d/themes/doom-rose-pine-moon-theme.el")
+   ;;dotspacemacs-themes '(doom-rose-pine-moon)
+   ;;(load-theme 'doom-rose-pine-moon t)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `doom', `vim-powerline' and `vanilla'. The
@@ -270,15 +270,11 @@ It should only modify the values of Spacemacs settings."
    ;; Default font or prioritized list of fonts. The `:size' can be specified as
    ;; a non-negative integer (pixel size), or a floating-point (point size).
    ;; Point size is recommended, because it's device independent. (default 10.0)
-   ;; dotspacemacs-default-font '("Source Code Pro"
-   ;;                             :size 12.0
-   ;;                             :weight normal
-   ;;                             :width normal)
-
    dotspacemacs-default-font '("Fira Code Retina"
-                               :size 12.0
+                               :size 18.0
                                :weight normal
                                :width normal)
+
    ;; The leader key (default "SPC")
    dotspacemacs-leader-key "SPC"
 
@@ -388,17 +384,17 @@ It should only modify the values of Spacemacs settings."
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.
    ;; Transparency can be toggled through `toggle-transparency'. (default 90)
-   dotspacemacs-active-transparency 90
+   ;;dotspacemacs-active-transparency 90
 
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's inactive or deselected.
    ;; Transparency can be toggled through `toggle-transparency'. (default 90)
-   dotspacemacs-inactive-transparency 90
+   ;;dotspacemacs-inactive-transparency 90
 
    ;; A value from the range (0..100), in increasing opacity, which describes the
    ;; transparency level of a frame background when it's active or selected. Transparency
    ;; can be toggled through `toggle-background-transparency'. (default 90)
-   dotspacemacs-background-transparency 90
+   ;;dotspacemacs-background-transparency 90
 
    ;; If non-nil show the titles of transient states. (default t)
    dotspacemacs-show-transient-state-title t
@@ -438,7 +434,7 @@ It should only modify the values of Spacemacs settings."
    ;;   :size-limit-kb 1000)
    ;; When used in a plist, `visual' takes precedence over `relative'.
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers 'relative
 
    ;; Code folding method. Possible values are `evil', `origami' and `vimish'.
    ;; (default 'evil)
@@ -572,9 +568,9 @@ It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
   ;; (add-to-list 'configuration-layer--elpa-archives
   ;;              '("melpa" . "https://melpa.org/packages/") t)
-
-  (defvar kito/default-font-size 160)
-  (defvar kito/default-variable-font-size 160)
+  (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+  (defvar kito/default-font-size 180)
+  (defvar kito/default-variable-font-size 180)
   (defvar kito/default-org-block-font-size 140)
   (defvar kito/default-org-code-font-size 120)
   (defvar kito/default-org-table-font-size 120)
@@ -592,16 +588,22 @@ dump."
   (require 'org-contrib)
   (require 'org-pdftools)
   (require 'org-bullets)
-
   (require 'org-tempo)
   (require 'ox-latex)
   (require 'ox-beamer)
   (require 'visual-fill-column)
   (require 'dockerfile-mode)
 
+  ;; Bind C-a to mark-whole-buffer
+  ;;(global-set-key (kbd "C-a") 'mark-whole-buffer)
+  (spacemacs/set-leader-keys "C-a" 'mark-whole-buffer)
+
+  (load-file "~/.emacs.d/themes/doom-rose-pine-moon-theme.el")
+  (load-theme 'doom-rose-pine-moon t)
+
   (set-frame-parameter (selected-frame) 'alpha '(85 85))
   (add-to-list 'default-frame-alist '(alpha 85 85))
-  
+
   (use-package rainbow-delimiters
     :hook (prog-mode . rainbow-delimiters-mode))
 
@@ -619,7 +621,7 @@ dump."
   ;(auto-revert-use-notify nil)
   (setq revert-without-query '(".*"))
 
-  ;;(set-face-attribute 'default nil :font "Fira Code Retina" :height kito/default-font-size)
+  (set-face-attribute 'default nil :font "Fira Code Retina" :height kito/default-font-size)
 
   ;; Set the fixed pitch face
   (set-face-attribute 'fixed-pitch nil :font "Fira Code Retina" :height kito/default-font-size)
@@ -656,8 +658,11 @@ dump."
     ;; (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch))
 
     (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
-    (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
-    (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+;;    (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
+;;    (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+    (set-face-attribute 'org-special-keyword nil :inherit 'fixed-pitch)
+    (set-face-attribute 'org-meta-line nil :inherit 'fixed-pitch)
+
     (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)
     (set-face-attribute 'org-block nil :font "Fira Code Retina" :height kito/default-org-block-font-size)
     (set-face-attribute 'org-table nil :font "Fira Code Retina" :height kito/default-org-table-font-size)
@@ -919,7 +924,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(evil-want-Y-yank-to-eol nil)
  '(package-selected-packages
-   '(company-lua lua-mode company-c-headers company-rtags company-ycmd cpp-auto-include disaster flycheck-rtags flycheck-ycmd gendoxy google-c-style ivy-rtags rtags ycmd request-deferred all-the-icons json-mode json-navigator hierarchy json-reformat json-snatcher spaceline powerline systemd journalctl-mode sqlite3 djvu nov dockerfile-mode import-js grizzl js-doc js2-refactor multiple-cursors livid-mode nodejs-repl npm-mode skewer-mode js2-mode tern add-node-modules-path company-web web-completion-data counsel-css emmet-mode helm-css-scss impatient-mode htmlize prettier-js pug-mode sass-mode haml-mode scss-mode slim-mode tagedit web-beautify web-mode flycheck-cask flycheck-cstyle blacken code-cells company-anaconda anaconda-mode counsel-gtags cython-mode dap-mode lsp-docker bui ggtags helm-cscope helm-gtags helm helm-pydoc helm-core importmagic epc ctable concurrent deferred live-py-mode lsp-pyright lsp-python-ms nose pip-requirements pipenv load-env-vars pippel poetry py-isort pydoc pyenv-mode pythonic pylookup pytest pyvenv sphinx-doc stickyfunc-enhance xcscope yapfify quelpa quelpa-use-package csv-mode cuda-mode jupyter all-the-icons-ivy yasnippet-snippets ws-butler writeroom-mode winum which-key wgrep volatile-highlights vim-powerline vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-magit treemacs-icons-dired treemacs-evil toc-org term-cursor symon symbol-overlay string-inflection string-edit-at-point spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline-all-the-icons space-doc smex smeargle restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar org-pdftools org-contrib org-bullets open-junk-file nameless multi-line mmm-mode markdown-toc macrostep lsp-ui lsp-treemacs lsp-origami lsp-ivy lorem-ipsum link-hint ivy-yasnippet ivy-xref ivy-purpose ivy-hydra ivy-avy inspector info+ indent-guide hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-make google-translate golden-ratio gitignore-templates git-timemachine git-modes git-messenger git-link gh-md fuzzy forge font-lock+ flycheck-pos-tip flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav elisp-def editorconfig dumb-jump drag-stuff dotenv-mode doom-themes dired-quick-sort diminish devdocs define-word counsel-projectile company column-enforce-mode clean-aindent-mode centered-cursor-mode auto-yasnippet auto-highlight-symbol auto-compile async aggressive-indent ace-link ac-ispell)))
+   '(company-lua lua-mode company-c-headers company-rtags company-ycmd cpp-auto-include disaster flycheck-rtags flycheck-ycmd gendoxy google-c-style ivy-rtags rtags ycmd request-deferred all-the-icons json-mode json-navigator hierarchy json-reformat json-snatcher spaceline powerline systemd journalctl-mode sqlite3 djvu nov dockerfile-mode import-js grizzl js-doc js2-refactor multiple-cursors livid-mode nodejs-repl npm-mode skewer-mode js2-mode tern add-node-modules-path company-web web-completion-data counsel-css emmet-mode helm-css-scss impatient-mode htmlize prettier-js pug-mode sass-mode haml-mode scss-mode slim-mode tagedit web-beautify web-mode flycheck-cask flycheck-cstyle blacken code-cells company-anaconda anaconda-mode counsel-gtags cython-mode dap-mode lsp-docker bui ggtags helm-cscope helm-gtags helm helm-pydoc helm-core importmagic epc ctable concurrent deferred live-py-mode lsp-pyright lsp-python-ms nose pip-requirements pipenv load-env-vars pippel poetry py-isort pydoc pyenv-mode pythonic pylookup pytest pyvenv sphinx-doc stickyfunc-enhance xcscope yapfify quelpa quelpa-use-package csv-mode cuda-mode jupyter all-the-icons-ivy yasnippet-snippets ws-butler writeroom-mode winum which-key wgrep volatile-highlights vim-powerline vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-magit treemacs-icons-dired treemacs-evil toc-org term-cursor symon symbol-overlay string-inflection string-edit-at-point spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline-all-the-icons space-doc smex smeargle restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar org-pdftools org-contrib org-bullets open-junk-file nameless multi-line mmm-mode markdown-toc macrostep lsp-ui lsp-treemacs lsp-origami lsp-ivy lorem-ipsum link-hint ivy-yasnippet ivy-xref ivy-purpose ivy-hydra ivy-avy inspector info+ indent-guide hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-make google-translate golden-ratio gitignore-templates git-timemachine git-modes git-messenger git-link gh-md fuzzy forge font-lock+ flycheck-pos-tip flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav elisp-def editorconfig dumb-jump drag-stuff dotenv-mode dired-quick-sort diminish devdocs define-word counsel-projectile company column-enforce-mode clean-aindent-mode centered-cursor-mode auto-yasnippet auto-highlight-symbol auto-compile async aggressive-indent ace-link ac-ispell)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

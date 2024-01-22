@@ -3,7 +3,7 @@
 #
 
 # Environment Variables and Terminal Settings
-export TERM="tmux-256color"
+#export TERM="tmux-256color"
 export VISUAL='nvim'
 export EDITOR='nvim'
 export TERMINAL=alacritty

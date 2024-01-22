@@ -1,9 +1,12 @@
 #!/bin/bash
+# Get the directory of the current script
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 ARG="$1"
 CMD='sudo nordvpn'
-LOCATION='estonia'
-TOKEN=$(cat .nord_token)
 #LOCATION='cyprus'
+LOCATION='estonia'
+TOKEN=$(cat $DIR/.nord_token)
 
 function disconnect(){
     $CMD set killswitch false

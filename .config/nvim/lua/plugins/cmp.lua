@@ -24,6 +24,7 @@ return {
                 sources = cmp.config.sources({
                     { name = "nvim_lsp" },
                     { name = "luasnip" },
+                    { name = "orgmode" },
                 }, {
                     { name = "buffer" },
                 }),
@@ -31,7 +32,7 @@ return {
         end,
     },
     {
-        'hrsh7th/cmp-path',
+        "hrsh7th/cmp-path",
         name = "path",
         lazy = false
     },
