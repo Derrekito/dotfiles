@@ -24,7 +24,7 @@ command=amixer get Master | awk -F'[][]' '/Left:/ { print $2 }'
 label=VOL
 interval=once
 signal=10
-click_left="pavucontrol"
+#click_left="pavucontrol"
 
 [cpu]
 command=i3blocks-cpu-usage
