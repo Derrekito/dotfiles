@@ -13,13 +13,13 @@ return {
                         ".env*",
                         "wrangler.toml",
                         ".dev.vars",
+                    },
+                    -- Match an equals sign and any character after it.
+                    -- This can also be a table of patterns to cloak,
+                    -- exmaple: cloak_pattern = { ":.+", "-.+" } for yaml files.
+                    cloak_pattern = "=.+"
                 },
-                -- Match an equals sign and any character after it.
-                -- This can also be a table of patterns to cloak,
-                -- exmaple: cloak_pattern = { ":.+", "-.+" } for yaml files.
-                cloak_pattern = "=.+"
             },
-        },
-    })
+        })
     end
 }

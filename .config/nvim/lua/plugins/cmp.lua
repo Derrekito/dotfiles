@@ -26,8 +26,8 @@ return {
                     { name = "luasnip" },
                     { name = "orgmode" },
                 }, {
-                    { name = "buffer" },
-                }),
+                        { name = "buffer" },
+                    }),
             })
         end,
     },
@@ -80,13 +80,13 @@ return {
                 sources = cmp.config.sources({
                     { name = 'path' }
                 }, {
-                    {
-                        name = 'cmdline',
-                        option = {
-                            ignore_cmds = { 'Man', '!' }
+                        {
+                            name = 'cmdline',
+                            option = {
+                                ignore_cmds = { 'Man', '!' }
+                            }
                         }
-                    }
-                })
+                    })
             })
         end,
     },
