@@ -23,31 +23,36 @@ return {
         },
         lazy = false,
         config = function()
-            require("mason-lspconfig").setup({
-                ensure_installed = {
-                    'clangd', 'rust_analyzer', 'bashls', 'lua_ls', 'marksman', 'pylsp', 'jsonls', 'texlab'
-                },
+            require("mason-lspconfig").setup {
+                ensure_installed = { 'clangd', 'rust_analyzer', 'bashls', 'lua_ls', 'marksman', 'pylsp', 'jsonls', 'texlab' },
                 automatic_installation = true,
                 handlers = {
                     function(server_name)
-                        if server_name == "lua_ls" then
+                        local opts = {} -- Initialize server-specific options
+                        if server_name == "clangd" then
+                            opts.cmd = {
+                                "clangd",
+                                "--background-index",
+                                "--suggest-missing-includes",
+                                "--clang-tidy",
+                                "--header-insertion=iwyu",
+                                "--header-insertion-decorators"
+                            }
+                        elseif server_name == "lua_ls" then
                             -- Special setup for lua_ls
-                            require("lspconfig")[server_name].setup{
-                                settings = {
-                                    Lua = {
-                                        diagnostics = {
-                                            globals = {'vim', 'bufnr'},
-                                        },
+                            opts.settings = {
+                                Lua = {
+                                    diagnostics = {
+                                        globals = {'vim', 'bufnr'},
                                     },
                                 },
                             }
-                        else
-                            -- Generic setup for other servers
-                            require("lspconfig")[server_name].setup{}
                         end
+                        require("lspconfig")[server_name].setup(opts)
                     end,
                 }
-            })
+            }
+
         end,
     },
 

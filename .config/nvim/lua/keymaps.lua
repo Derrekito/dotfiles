@@ -2,6 +2,9 @@ local setkey = vim.keymap.set
 
 vim.g.mapleader = " "
 
+-- Increase font size
+setkey("n", "<leader>+", ":hi! Normal guifont+=1<CR>")
+
 -- In visual mode, move the selected block of text one line up or down and
 -- reselect the block.
 setkey("v", "J", ":m '>+1<CR>gv=gv")

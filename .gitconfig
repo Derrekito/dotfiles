@@ -4,3 +4,11 @@
 [core]
 	editor = nvim
 	excludesfile = ~/.gitignore
+[rerere]
+	enabled = true
+[column]
+	ui = row
+[branch]
+	sort = -committerdate
+[maintenance]
+	repo = /home/derrekito/Projects/RADCAST
