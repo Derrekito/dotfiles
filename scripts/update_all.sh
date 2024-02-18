@@ -45,9 +45,9 @@ function update_emacs
 function update_flatpak
 {
     log "Updating Flatpak..."
-    flatpak update 2>&1 | tee -a "$log_file"
+    flatpak update --noninteractive 2>&1 | tee -a "$log_file"
     log "Removing unused Flatpak runtimes and apps..."
-    flatpak uninstall --unused 2>&1 | tee -a "$log_file"
+    flatpak uninstall --unused --noninteractive 2>&1 | tee -a "$log_file"
     log "Flatpak updated and unused runtimes/apps removed."
 }
 
