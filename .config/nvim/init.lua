@@ -12,8 +12,8 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("keymaps")
-require("vim-options")
 require("lazy").setup("plugins")
+require("vim-options")
 
 
 local augroup = vim.api.nvim_create_augroup

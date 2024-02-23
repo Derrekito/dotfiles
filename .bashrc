@@ -41,6 +41,7 @@ alias vim='nvim'
 alias v='nvim'
 alias mkdir='mkdir -pv'
 alias ccat='highlight --out-format=ansi'
+alias tmux='tmux attach || tmux new-session'
 
 if [ "$(hostname)" = "pop-os" ]; then
     print_satellite.sh
