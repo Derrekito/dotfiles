@@ -130,3 +130,13 @@ setkey("n", "<C-left>", "<C-w><")
 setkey("n", "<C-right>", "<C-w>>")
 setkey("n", "<C-up>", "<C-w>+")
 setkey("n", "<C-down>", "<C-w>-")
+
+-- Set highlight on search, but clear on pressing <esc> in normal mode
+vim.opt.hlsearch = true
+setkey("n", "<esc>", ":nohlsearch<CR>")
+
+-- Diagnostic Keymaps
+setkey("n", "<leader>dn", vim.diagnostic.goto_next, {desc="Go to next diagnostic"})
+setkey("n", "<leader>dp", vim.diagnostic.goto_prev, {desc="Go to previous diagnostic"})
+setkey("n", "<leader>e", vim.diagnostic.open_float, {desc="Open diagnostics [E]rror message"})
+setkey("n", "<leader>q", vim.diagnostic.setloclist, {desc="Open diagnostics [Q]uickfix list"})

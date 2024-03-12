@@ -254,7 +254,7 @@ exec_always --no-startup-id /usr/bin/i3wsr
 
 exec_always --no-startup-id $HOME/scripts/set_random_wallpaper.sh
 
-exec_always picom -b
+exec_always picom -b --backend glx --vsync
 
 exec_always --no-startup-id nm-applet
 
