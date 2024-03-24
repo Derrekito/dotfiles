@@ -2,7 +2,7 @@ return {
     -- Mason configuration for LSP server management
     {
         "williamboman/mason.nvim",
-        lazy = false,  -- Adjust this based on your preference
+        lazy = false,
         config = function()
             require("mason").setup({
                 ui = {

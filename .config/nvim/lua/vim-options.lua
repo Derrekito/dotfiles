@@ -1,4 +1,3 @@
-
 -- Function to setup smarter indentation with word wrapping
 local function setup_smart_indentation_wrapping()
     vim.wo.wrap = true

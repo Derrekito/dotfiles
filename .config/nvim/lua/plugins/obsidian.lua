@@ -11,10 +11,7 @@ return {
     --   "BufNewFile path/to/my-vault/**.md",
     -- },
     dependencies = {
-        -- Required.
         "nvim-lua/plenary.nvim",
-
-        -- see below for full list of optional dependencies 👇
     },
     opts = {
         workspaces = {
@@ -43,7 +40,7 @@ return {
         new_notes_location = "current_dir",
 
         -- Either 'wiki' or 'markdown'.
-        preferred_link_style = "wiki",
+        preferred_link_style = "markdown",
 
         -- Control how wiki links are completed with these (mutually exclusive) options:
         --
