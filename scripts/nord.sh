@@ -4,8 +4,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 ARG="$1"
 CMD='sudo nordvpn'
-#LOCATION='cyprus'
-LOCATION='estonia'
+LOCATION='cyprus'
 TOKEN=$(cat $DIR/.nord_token)
 
 function disconnect(){
@@ -19,6 +18,7 @@ function connect(){
 }
 
 function start(){
+    sudo systemctl enable --now nordvpnd
 	sudo nordvpn login --token $TOKEN
     sudo systemctl start nordvpnd
 }

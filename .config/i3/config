@@ -243,19 +243,15 @@ exec xset -dpms
 exec xsetroot -solid "#000000"
 
 exec --no-startup-id polychromatic-tray-applet &
-#exec --no-startup-id nm-applet &
-#exec emacs --daemon
 
 exec set -o vi
 
-#exec setxkbmap -option caps:swapescape
-
-exec_always --no-startup-id /usr/bin/i3wsr
+exec --no-startup-id /usr/bin/i3wsr
 
 exec_always --no-startup-id $HOME/scripts/set_random_wallpaper.sh
 
-exec_always picom -b --backend glx --vsync
+exec picom -b --config $HOME/.config/picom/picom.conf
 
-exec_always --no-startup-id nm-applet
+exec --no-startup-id nm-applet
 
-exec_always --no-startup-id pasystray
+exec --no-startup-id pasystray
