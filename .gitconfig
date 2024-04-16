@@ -12,3 +12,5 @@
 	sort = -committerdate
 [maintenance]
 	repo = /home/derrekito/Projects/RADCAST
+[init]
+	defaultBranch = master
