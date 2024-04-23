@@ -250,6 +250,8 @@ exec --no-startup-id /usr/bin/i3wsr
 
 exec_always --no-startup-id $HOME/scripts/set_random_wallpaper.sh
 
+exec tmux start-server
+
 exec picom -b --config $HOME/.config/picom/picom.conf
 
 exec --no-startup-id nm-applet

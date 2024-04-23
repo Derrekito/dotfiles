@@ -10,3 +10,5 @@ else
     # If no unoccupied session exists, create a new one
     exec tmux new-session
 fi
+
+sleep 1
