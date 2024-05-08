@@ -2,6 +2,11 @@
 # ~/.bashrc
 #
 
+# Automatically attach to tmux session if available, otherwise start a new one
+#if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
+#    tmux -a || tmux new -s default
+#fi
+
 # cd into directory by typing only directory name
 shopt -s autocd
 

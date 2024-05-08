@@ -14,3 +14,5 @@
 	repo = /home/derrekito/Projects/RADCAST
 [init]
 	defaultBranch = master
+[pull]
+	rebase = true
