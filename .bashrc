@@ -47,6 +47,7 @@ alias v='nvim'
 alias mkdir='mkdir -pv'
 alias ccat='highlight --out-format=ansi'
 alias tmux='tmux attach || tmux new-session'
+alias resolve='LD_PRELOAD="/usr/lib/libgio-2.0.so /usr/lib/libgmodule-2.0.so" /opt/resolve/bin/resolve'
 
 if [ "$(hostname)" = "pop-os" ]; then
     print_satellite.sh
