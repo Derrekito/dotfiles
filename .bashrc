@@ -9,9 +9,12 @@
 
 # cd into directory by typing only directory name
 shopt -s autocd
+# set vi mode
+set -o vi
 
 # infinite history
 HISTSIZE=HISTFILESIZE=
+
 
 # Environment Variables and Terminal Settings
 #export TERM="tmux-256color"
@@ -24,7 +27,9 @@ export PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"
 export PERL_LOCAL_LIB_ROOT="$HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"
 export PERL_MB_OPT="--install_base \"$HOME/perl5\""
 export PERL_Mb_OPT="INSTALL_BASE=$HOME/perl5"
-set -o vi
+# required for Davinci Resolve to work.
+export LOG4CXX_CONFIGURATION=file:///$HOME/log4cxx.properties
+
 
 source "$HOME/.config/alacritty/alacritty.bash"
 
