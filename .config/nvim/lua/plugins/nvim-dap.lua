@@ -19,5 +19,6 @@ return {
             vim.api.nvim_set_keymap("n", "<leader>dr", "<cmd>lua require('dapui').open({reset = true})<CR>", { noremap = true, silent = true })
         end,
         after = "nvim-dap" -- Load nvim-dap-ui after nvim-dap
-    }
+    },
+    { "nvim-neotest/nvim-nio" }
 }
