@@ -1,18 +1,20 @@
 #!/bin/bash
 
+# Function to get the first session
+get_first_session() {
+    tmux list-sessions -F "#{session_name}" 2>/dev/null | head -n1
+}
+
 # Check if tmux server is running
 if ! tmux has-session 2>/dev/null; then
     # No tmux server running, start a new session
-    exec tmux new-session -s default
+    tmux new-session -d -s default
+    exec tmux attach-session -t default
 else
-    # Attempt to attach to the first unoccupied session if it exists
-    unoccupied_session=$(tmux list-sessions -F "#{session_name}:#{session_attached}" | awk -F: '$2==0 {print $1; exit}')
+    # Get the first session (or use 'default' if none exists)
+    session=$(get_first_session)
+    session=${session:-default}
 
-    if [ -n "$unoccupied_session" ]; then
-        # If there is an unoccupied session, attach to it
-        exec tmux attach-session -t "$unoccupied_session"
-    else
-        # If no unoccupied session exists, create a new one
-        exec tmux new-session -A -s default
-    fi
+    # Create a new window in the session and attach to it
+    exec tmux new-session -t "$session" \; new-window
 fi
