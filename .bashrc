@@ -15,14 +15,13 @@ set -o vi
 # infinite history
 HISTSIZE=HISTFILESIZE=
 
-
 # Environment Variables and Terminal Settings
 #export TERM="tmux-256color"
 export VISUAL='nvim'
 export EDITOR='nvim'
 export TERMINAL=alacritty
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/OpenBLAS/lib:/usr/local/lib
-export PATH=$PATH:$HOME/scripts:$HOME/.cargo/bin:$HOME/.local/bin:$HOME/perl5/lib/bin
+export PATH=$PATH:$HOME/scripts:$HOME/.cargo/bin:$HOME/.local/bin:$HOME/perl5/lib/bin:/usr/local/cuda
 export PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"
 export PERL_LOCAL_LIB_ROOT="$HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"
 export PERL_MB_OPT="--install_base \"$HOME/perl5\""
@@ -61,3 +60,5 @@ else
 fi
 
 eval "$(starship init bash)"
+
+
