@@ -15,4 +15,4 @@ case "$1" in
 esac
 
 # Always display current brightness percentage
-echo $((current * 100 / max))
+echo " $((current * 100 / max))%"
