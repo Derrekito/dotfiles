@@ -53,6 +53,23 @@ alias ccat='highlight --out-format=ansi'
 alias tmux='tmux attach || tmux new-session'
 alias resolve='LD_PRELOAD="/usr/lib/libgio-2.0.so /usr/lib/libgmodule-2.0.so" /opt/resolve/bin/resolve'
 
+# Git aliases
+alias g='git'
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit'
+alias gcm='git commit -m'
+alias gca='git commit --amend'
+alias gd='git diff'
+alias gl='git log'
+alias gll='git log --oneline'
+alias gp='git push'
+alias gpl='git pull'
+alias gwta='git worktree add'
+alias gwtl='git worktree list'
+alias gwtm='git worktree move'
+alias gwtr='git worktree remove'
+
 if [ "$(hostname)" = "pop-os" ]; then
     print_satellite.sh
 else

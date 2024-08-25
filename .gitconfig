@@ -16,3 +16,7 @@
 	defaultBranch = master
 [pull]
 	rebase = true
+[alias]
+	wta = worktree add
+	wtl = worktree list
+	wtr = worktree remove
