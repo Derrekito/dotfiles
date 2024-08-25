@@ -1,32 +1,37 @@
+# General i3blocks settings
+separator=true
+separator_block_width=20
+
 [memory]
-command=free -h | awk '/^Mem/ {print $3 "/" $2}'
 interval=10
+command=~/scripts/ram_status.sh
 
 [cpu]
 command=i3blocks-cpu
 interval=10
 
 [disk]
-command=df -h / | awk '/\// {print $3 "/" $2}'
 interval=30
-
-[time]
-command=date '+%Y-%m-%d %H:%M:%S'
-interval=1
+command=~/scripts/hdd_status.sh
 
 [battery]
-command=echo "$(cat /sys/class/power_supply/BAT0/status) $(cat /sys/class/power_supply/BAT0/capacity)%"
-interval=30
-label=BAT
+interval=10
+command=~/scripts/battery_status.sh
 
 [volume]
-command=amixer get Master | awk -F'[][]' '/Left:/ { print $2 }'
-label=VOL
-interval=once
-signal=10
-#click_left="pavucontrol"
+interval=1
+command=~/scripts/volume_status.sh
 
 [cpu]
 command=i3blocks-cpu-usage
 interval=10
 label=CPU
+
+[brightness]
+label=󰃠
+interval=1
+command=~/scripts/brightness.sh $BLOCK_BUTTON
+
+[time]
+command=date '+%Y-%m-%d %H:%M:%S'
+interval=1
