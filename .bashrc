@@ -15,13 +15,17 @@ set -o vi
 # infinite history
 HISTSIZE=HISTFILESIZE=
 
+ANTHROPIC_API_KEY="$(cat ~/.market/ant_key)"
+export ANTHROPIC_API_KEY
+
 # Environment Variables and Terminal Settings
 #export TERM="tmux-256color"
 export VISUAL='nvim'
 export EDITOR='nvim'
 export TERMINAL=alacritty
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/OpenBLAS/lib:/usr/local/lib
-export PATH=$PATH:$HOME/go/bin:$HOME/scripts:$HOME/.cargo/bin:$HOME/.local/bin:$HOME/perl5/lib/bin:/usr/local/cuda
+export PATH=$PATH:$HOME/scripts:$HOME/go/bin:$HOME/.cargo/bin:$HOME/.local/bin:$HOME/perl5/lib/bin:/usr/local/cuda/bin
+export PATH=/usr/local/NVIDIA-Nsight-Compute-2024.3/target/linux-desktop-glibc_2_11_3-x64:$PATH
 export PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"
 export PERL_LOCAL_LIB_ROOT="$HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"
 export PERL_MB_OPT="--install_base \"$HOME/perl5\""
@@ -36,11 +40,13 @@ source "$HOME/.config/alacritty/alacritty.bash"
 [[ $- != *i* ]] && return
 
 # Alias definitions
+alias vintagestory='~/vintagestory/run.sh'
 alias ls='ls --color=auto --group-directories-first'
 alias la='ls -aogh --color=auto'
 alias ll='ls -1 --color=auto'
 alias grep='grep --color=auto'
-alias tree="tree -a -I '.git'"
+#alias tree="tree -a -I '.git'"
+alias tree="tree -a --dirsfirst -I '__pycache__|venv|.venv|node_modules|dist|build|*.egg-info|.git|.pytest_cache' | sed -E 's/( -> .*)$/ -> [hidden]/'"
 alias :q='exit'
 alias dotcfg='/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME'
 alias sv='sudo vim'

@@ -1,15 +1,21 @@
-selection.save_to_clipboard = true
+import = ["~/.config/alacritty/themes/rose-pine/rose-pine.toml"]
+
+[selection]
+save_to_clipboard = true
+
+#[general]
 
 [env]
-TERM = "xterm-256color"
+TERM = "alacritty-direct"
 
-[terminal.shell]
-#program = "/usr/bin/tmux"
+#[terminal]
+#shell = { program = "/bin/bash", args = ["-c", "tmux-attach.sh"] }
+
+[shell]
 program = "/bin/bash"
 args = ["-c", "tmux-attach.sh"]
 
 [font]
-
 # Normal text
 normal = { family = "Hack Nerd Font", style = "Regular" }
 
@@ -34,8 +40,4 @@ glyph_offset = { x = 0, y = 0 }
 # Builtin box drawing (enable or disable as needed, default is true)
 builtin_box_drawing = true
 
-[general]
-import = ["~/.config/alacritty/themes/rose-pine/rose-pine.toml"]
-
-[terminal]
 

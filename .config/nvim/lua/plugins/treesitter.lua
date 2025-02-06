@@ -1,7 +1,7 @@
 return {
     {
         "nvim-treesitter/nvim-treesitter",
-        build = ":TSUpdate",  -- This is better than using an autocommand
+        build = ":TSUpdate",
         config = function()
             -- Add protection against startup errors
             local status_ok, configs = pcall(require, "nvim-treesitter.configs")
@@ -21,7 +21,8 @@ return {
                     "query",
                     "latex",
                     "markdown",
-                    "make"
+                    "make",
+                    "cuda",
                 },
                 sync_install = false,
                 auto_install = true,

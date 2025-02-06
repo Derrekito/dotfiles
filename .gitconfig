@@ -1,22 +1,28 @@
-[user]
-	email = Derrekito@users.noreply.github.com
-	name = Derrek Landauer
+[include]
+    path = ~/.gitconfig-dle
+
+[includeIf "hasconfig:remote.origin.url:git@gitlab.dle.afrl.af.mil"]
+    path = ~/.gitconfig-dle
+
+[includeIf "hasconfig:remote.origin.url:git@github.com"]
+    path = ~/.gitconfig-github
+
 [core]
-	editor = nvim
-	excludesfile = ~/.gitignore
+    editor = nvim
+    excludesfile = ~/.gitignore
 [rerere]
-	enabled = true
+    enabled = true
 [column]
-	ui = row
+    ui = row
 [branch]
-	sort = -committerdate
+    sort = -committerdate
 [maintenance]
-	repo = /home/derrekito/Projects/RADCAST
+    auto = true
 [init]
-	defaultBranch = master
+    defaultBranch = master
 [pull]
-	rebase = true
+    rebase = true
 [alias]
-	wta = worktree add
-	wtl = worktree list
-	wtr = worktree remove
+    wta = worktree add
+    wtl = worktree list
+    wtr = worktree remove

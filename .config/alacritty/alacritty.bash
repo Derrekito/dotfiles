@@ -6,7 +6,7 @@ _alacritty() {
     cmd=""
     opts=""
 
-    for i in ${COMP_WORDS[@]}
+    for i in "${COMP_WORDS[@]}"
     do
         case "${cmd},${i}" in
             ",$1")
