@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Usage: update.sh [AUR_DIRECTORY]
+# Usage: update_all.sh [AUR_DIRECTORY]
 # Default AUR directory if not provided
 aur_package_dir="${1:-$HOME/aur_packages}"
 
@@ -8,42 +8,20 @@ aur_package_dir="${1:-$HOME/aur_packages}"
 log_file="/tmp/update.log"
 
 # Log function
-function log
-{
+function log {
     echo "[$(date +'%Y-%m-%d %H:%M:%S')] $1" | tee -a "$log_file"
 }
 
 # Check for required commands
-for cmd in emacs flatpak pacman git makepkg; do
+for cmd in flatpak pacman yay; do
     if ! command -v $cmd &> /dev/null; then
         log "$cmd could not be found, please install $cmd"
         exit 1
     fi
 done
-# Function to get the installed version of a package
-function get_installed_version
-{
-    pacman -Q "$1" 2>/dev/null | awk '{print $2}'
-}
-
-# Function to get the AUR version of a package
-function get_aur_version
-{
-    grep -m1 'pkgver=' PKGBUILD | cut -d'=' -f2
-}
-
-# Function to update Emacs packages
-function update_emacs
-{
-    log "Updating Emacs packages..."
-    emacs --batch --eval "(package-refresh-contents)" 2>&1 | tee -a "$log_file"
-    emacs --batch --eval "(package-upgrade-all)" 2>&1 | tee -a "$log_file"
-    log "Emacs packages updated."
-}
 
 # Function to update Flatpak
-function update_flatpak
-{
+function update_flatpak {
     log "Updating Flatpak..."
     flatpak update --noninteractive 2>&1 | tee -a "$log_file"
     log "Removing unused Flatpak runtimes and apps..."
@@ -52,28 +30,33 @@ function update_flatpak
 }
 
 # Function to update Arch system
-function update_arch
-{
+function update_arch {
     log "Updating Arch system..."
+    sudo pacman -Syu --noconfirm 2>&1 | tee -a "$log_file"
 
-    # Run the update command and redirect both stdout and stderr to the log file
-    if ! sudo pacman -Syu 2>&1 | tee -a "$log_file"; then
+    # Check the exit status of pacman and handle errors
+    if [ "${PIPESTATUS[0]}" != 0 ]; then
         log "Error: Package conflict encountered during system update. Exiting with error."
         exit 1
     fi
-
     log "Arch system updated."
 }
 
-# Function to update AUR packages
-function update_aur
-{
+# Function to update AUR packages with automation
+function update_aur {
     if [ -d "$aur_package_dir" ]; then
         log "Updating AUR packages in $aur_package_dir..."
-        yay -Syu --aur --noconfirm 2>&1 | tee -a "$log_file"
+        # Automatically clean build only for packages with issues
+        yay -Syu --noconfirm --cleanafter --answerclean=ask --answerdiff=None --builddir="$aur_package_dir" 2>&1 | tee -a "$log_file"
+
+        # Check the exit status of yay
+        if [ "${PIPESTATUS[0]}" != 0 ]; then
+            log "Error: AUR update failed. Check the log for details."
+            exit 1
+        fi
         log "AUR packages updated."
     else
-        log "AUR directory $aur_package_dir does not exist"
+        log "AUR directory $aur_package_dir does not exist."
     fi
 }
 
@@ -81,7 +64,6 @@ function update_aur
 log "=== Starting system updates ==="
 update_arch
 update_aur
-update_emacs
 update_flatpak
 log "=== All updates completed ==="
 
