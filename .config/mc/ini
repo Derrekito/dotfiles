@@ -88,7 +88,7 @@ shell_directory_timeout=900
 
 [Layout]
 output_lines=0
-left_panel_size=172
+left_panel_size=85
 top_panel_size=0
 message_visible=true
 keybar_visible=true
@@ -116,6 +116,8 @@ clipboard_paste=
 base_color=
 tmux-256color=
 color_terminals=
+
+xterm-256color=
 
 [Panels]
 show_mini_info=true
