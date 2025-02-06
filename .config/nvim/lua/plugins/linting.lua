@@ -1,16 +1,20 @@
 return {
-    "nvimtools/none-ls.nvim",
-    dependencies = {
-        "nvim-lua/plenary.nvim"
-    },
-    event = { "BufReadPre", "BufNewFile" },
+    'dense-analysis/ale',
     config = function()
-        local none_ls = require("none-ls")
-        none_ls.setup({
-            debug = true,
-            sources = {
-                none_ls.builtins.diagnostics.checkmake,
-            },
-        })
-    end,
+        local g = vim.g
+
+        -- Example: other configurations
+        --g.ale_ruby_rubocop_auto_correct_all = 1
+
+        -- Configure ALE linters for different filetypes
+        g.ale_linters = {
+            ruby = { 'rubocop', 'ruby' },
+            lua = { 'lua_language_server' },
+            make = { 'checkmake' },  -- Use checkmake for Makefiles
+        }
+
+        -- Optional: run linting when leaving insert mode and on text changes
+        g.ale_lint_on_insert_leave = 1
+        g.ale_lint_on_text_changed = 'always'
+    end
 }
