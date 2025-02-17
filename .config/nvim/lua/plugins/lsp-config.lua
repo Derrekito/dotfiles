@@ -47,6 +47,17 @@ return {
                                     },
                                 },
                             }
+                        elseif server_name == "pylsp" then
+                            -- Add configuration for pylsp
+                            opts.settings = {
+                                pylsp = {
+                                    plugins = {
+                                        pycodestyle = {
+                                            maxLineLength = 140, -- Set maximum line length
+                                        },
+                                    },
+                                },
+                            }
                         end
                         require("lspconfig")[server_name].setup(opts)
                     end,

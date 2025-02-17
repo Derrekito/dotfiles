@@ -35,7 +35,8 @@ glyph_offset = { x = 0, y = 0 }
 builtin_box_drawing = true
 
 [general]
-import = ["~/.config/alacritty/themes/rose-pine/rose-pine.toml"]
+#import = ["~/.config/alacritty/themes/rose-pine/rose-pine.toml"]
+import = ["~/.config/alacritty/themes/rose-pine/rose-pine-moon.toml"]
 
 [terminal]
 
