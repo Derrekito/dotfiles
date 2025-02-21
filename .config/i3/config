@@ -123,9 +123,7 @@ set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
-#set $ws9 ""
 set $ws9 "9"
-#set $ws10 ""
 set $ws10 "10"
 
 # switch to workspace
@@ -164,6 +162,7 @@ bindsym $mod+Shift+t exec "emacsclient -c"
 bindsym $mod+Shift+b exec "google-chrome-stable"
 bindsym $mod+Shift+n exec "i3-new-workspace.sh"
 bindsym $mod+Shift+p exec "xrandr --output eDP-1 --auto"
+
 # screenshot
 bindsym --release $mod+x exec --no-startup-id import /tmp/latest-screenshot.png
 
@@ -204,8 +203,8 @@ bar {
         colors {
             background #191724  # Rose Pine Background
             statusline #e0def4  # Rose Pine Foreground
-            separator #555169  # Rose Pine Muted
-                            # background text border
+            separator #555169   # Rose Pine Muted
+                                # background text border
             focused_workspace  #2a273f #e0def4 #907aa9  # Dark background, light text, muted border
             active_workspace   #393552 #e0def4 #907aa9  # Slightly lighter background for active
             inactive_workspace #191724 #686274 #191724  # Darkest for inactive, muted text
@@ -214,11 +213,19 @@ bar {
         }
 }
 
+# class                  border  backgr  text    indicator child_border
+#client.focused          #4c7899 #285577 #ffffff #2e9ef4   #aaaaaa
+#client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
+#client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+#client.urgent           #2f343a #900000 #ffffff #900000   #900000
+#client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+#client.background       #000000
+
 # class                 border  backgr. text    indicator child_border
-client.focused          #4c7899 #285577 #ffffff #2e9ef4   #aaaaaa
-client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
-client.unfocused        #333333 #222222 #888888 #292d2e   #222222
-client.urgent           #2f343a #900000 #ffffff #900000   #900000
+client.focused          #c4a7e7 #2a273f #e0def4 #c4a7e7   #c4a7e7
+client.focused_inactive #2a273f #232136 #6e6a86 #2a273f   #232136
+client.unfocused        #232136 #232136 #6e6a86 #232136   #232136
+client.urgent           #eb6f92 #232136 #e0def4 #eb6f92   #eb6f92
 client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 client.background       #000000
 
@@ -227,8 +234,8 @@ popup_during_fullscreen smart
 
 workspace_auto_back_and_forth yes
 
-gaps inner 15
-gaps outer 0
+gaps inner 4
+gaps outer -2
 smart_gaps on
 smart_borders on
 
@@ -254,7 +261,6 @@ exec_always --no-startup-id $HOME/scripts/set_random_wallpaper.sh
 exec tmux start-server
 
 exec picom --experimental-backends -b --config $HOME/.config/picom/picom.conf
-#exec picom -b --config $HOME/.config/picom/picom.conf
 
 exec --no-startup-id nm-applet
 

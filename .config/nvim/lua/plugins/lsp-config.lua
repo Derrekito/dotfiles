@@ -47,17 +47,29 @@ return {
                                     },
                                 },
                             }
-                        elseif server_name == "pylsp" then
-                            -- Add configuration for pylsp
-                            opts.settings = {
-                                pylsp = {
-                                    plugins = {
-                                        pycodestyle = {
-                                            maxLineLength = 140, -- Set maximum line length
+                            elseif server_name == "pylsp" then
+                                opts.settings = {
+                                    pylsp = {
+                                        configurationSources = { "pycodestyle" }, -- Ensure pycodestyle is the source
+                                        plugins = {
+                                            pycodestyle = {
+                                                enabled = true,
+                                                ignore = {'W391'},
+                                                maxLineLength = 140
+                                            },
+                                            flake8 = { enabled = false},
+                                            pylint = { enabled = false }, -- Disable others to isolate pycodestyle
+                                            pyflakes = { enabled = false },
                                         },
                                     },
-                                },
-                            }
+                                }
+                                opts.on_attach = function(client, bufnr)
+                                    vim.diagnostic.config({
+                                        virtual_text = true,
+                                        signs = true,
+                                        underline = true,
+                                    })
+                                end
                         end
                         require("lspconfig")[server_name].setup(opts)
                     end,

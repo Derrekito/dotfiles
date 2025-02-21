@@ -1,18 +1,17 @@
 return {
   {
     'dense-analysis/ale',
-    lazy = false,  -- Force loading on startup
+    lazy = false,
     config = function()
       local g = vim.g
-
-      -- Configure ALE linters for different filetypes
       g.ale_linters = {
         ruby = { 'rubocop', 'ruby' },
         lua = { 'lua_language_server' },
-        make = { 'checkmake' },  -- Use checkmake for Makefiles
+        make = { 'checkmake' },
+        python = { 'flake8', 'pylint' },
       }
-
-      -- Optional: run linting when leaving insert mode and on text changes
+      -- Set flake8 max-line-length to 140
+      g.ale_python_flake8_options = '--max-line-length=140'
       g.ale_lint_on_insert_leave = 1
       g.ale_lint_on_text_changed = 'always'
     end,

@@ -1,4 +1,5 @@
-import = ["~/.config/alacritty/themes/rose-pine/rose-pine.toml"]
+#import = ["~/.config/alacritty/themes/rose-pine/rose-pine.toml"]
+import = ["~/.config/alacritty/themes/rose-pine/rose-pine-moon.toml"]
 
 [selection]
 save_to_clipboard = true
@@ -39,5 +40,11 @@ glyph_offset = { x = 0, y = 0 }
 
 # Builtin box drawing (enable or disable as needed, default is true)
 builtin_box_drawing = true
+
+[cursor]
+style = { shape = "Block", blinking = "On" }
+
+# Set a different cursor for vi_mode (used in Neovim)
+vi_mode_style = { shape = "Beam" }
 
 
