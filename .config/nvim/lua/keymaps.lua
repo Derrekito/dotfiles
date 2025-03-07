@@ -140,3 +140,43 @@ setkey("n", "<leader>dn", vim.diagnostic.goto_next, {desc="Go to next diagnostic
 setkey("n", "<leader>dp", vim.diagnostic.goto_prev, {desc="Go to previous diagnostic"})
 setkey("n", "<leader>e", vim.diagnostic.open_float, {desc="Open diagnostics [E]rror message"})
 setkey("n", "<leader>q", vim.diagnostic.setloclist, {desc="Open diagnostics [Q]uickfix list"})
+
+-- OSC 52 function to copy to local clipboard
+local function osc52_yank()
+    -- Get the yanked text from register 0
+    local yanked_text = vim.fn.getreg('0')
+    if not yanked_text or yanked_text == '' then
+        print("Nothing to yank to clipboard")
+        return
+    end
+
+    -- Base64 encode it
+    local buffer = vim.fn.system('base64 -w0', yanked_text)
+    if vim.v.shell_error ~= 0 or not buffer then
+        print("Error: base64 failed or not installed")
+        return
+    end
+
+    -- Trim trailing newlines from base64 output
+    buffer = buffer:gsub('%s+$', '')
+
+    -- Build OSC 52 sequence
+    local osc52 = '\x1b]52;c;' .. buffer .. '\x07'
+
+    -- Write to stdout instead of /dev/tty
+    io.stdout:write(osc52)
+    io.stdout:flush() -- Ensure it sends immediately
+end
+
+-- Keep your autocommand as-is
+vim.api.nvim_create_autocmd('TextYankPost', {
+    group = vim.api.nvim_create_augroup('Osc52Clipboard', { clear = true }),
+    callback = function()
+        if vim.v.event.operator == 'y' then
+            osc52_yank()
+        end
+    end,
+})
+
+-- Optional: Map + register to clipboard
+vim.opt.clipboard:append('unnamedplus')
