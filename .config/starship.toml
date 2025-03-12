@@ -1,4 +1,5 @@
 format = '$all$sudo$character'
+command_timeout = 1000 # Timeout in milliseconds
 
 [hostname]
 ssh_only = true

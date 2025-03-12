@@ -10,6 +10,7 @@
 [core]
     editor = nvim
     excludesfile = ~/.gitignore
+	preloadIndex = true
 [rerere]
     enabled = true
 [column]

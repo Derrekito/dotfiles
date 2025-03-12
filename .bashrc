@@ -9,6 +9,7 @@
 
 # cd into directory by typing only directory name
 shopt -s autocd
+
 # set vi mode
 set -o vi
 
@@ -76,7 +77,7 @@ alias gwtl='git worktree list'
 alias gwtm='git worktree move'
 alias gwtr='git worktree remove'
 
-if [ "$(hostname)" = "pop-os" ]; then
+if [ "$(hostname)" = "spacerdarkstar" ]; then
     print_satellite.sh
 else
     print_mushroom.sh
