@@ -11,10 +11,13 @@ if ! tmux has-session 2>/dev/null; then
     tmux new-session -d -s default
     exec tmux attach-session -t default
 else
-    # Get the first session (or use 'default' if none exists)
+    # Get the first session
     session=$(get_first_session)
-    session=${session:-default}
-
-    # Create a new window in the session and attach to it
-    exec tmux new-session -t "$session" \; new-window
+    if [ -z "$session" ]; then
+        # No sessions exist (unlikely due to has-session check, but safe)
+        tmux new-session -d -s default
+        session="default"
+    fi
+    # Attach to the existing session
+    exec tmux attach-session -t "$session"
 fi

@@ -1,42 +1,36 @@
-selection.save_to_clipboard = true
+[general]
+import = ["~/.config/alacritty/themes/rose-pine/rose-pine-moon.toml"]
+
+[selection]
+save_to_clipboard = true
 
 [env]
-TERM = "xterm-256color"
+TERM = "alacritty-direct"
 
 [terminal.shell]
-#program = "/usr/bin/tmux"
 program = "/bin/bash"
 args = ["-c", "tmux-attach.sh"]
 
 [font]
-
-# Normal text
 normal = { family = "Hack Nerd Font", style = "Regular" }
-
-# Bold text
 bold = { family = "Hack Nerd Font", style = "Bold" }
-
-# Italic text
 italic = { family = "Hack Nerd Font", style = "Italic" }
-
-# Bold and Italic text
 bold_italic = { family = "Hack Nerd Font", style = "Bold Italic" }
-
-# Font size (11.25 is the default size, you can adjust as needed)
 size = 11.25
 
-# Offset (you can adjust as needed)
+# Offset
 offset = { x = 0, y = 0 }
 
-# Glyph offset (you can adjust as needed)
+# Glyph offset
 glyph_offset = { x = 0, y = 0 }
 
-# Builtin box drawing (enable or disable as needed, default is true)
+# Builtin box drawing
 builtin_box_drawing = true
 
-[general]
-#import = ["~/.config/alacritty/themes/rose-pine/rose-pine.toml"]
-import = ["~/.config/alacritty/themes/rose-pine/rose-pine-moon.toml"]
+[cursor]
+style = { shape = "Block", blinking = "Off" }
+# Set a different cursor for vi_mode (used in Neovim)
+vi_mode_style = { shape = "Beam" }
 
 [terminal]
-
+osc52 = "CopyPaste"  # Explicitly allow OSC 52 clipboard operations
