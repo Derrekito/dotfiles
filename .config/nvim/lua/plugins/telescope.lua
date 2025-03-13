@@ -1,74 +1,86 @@
 return {
-    {
-        "nvim-telescope/telescope-ui-select.nvim",
+  {
+    "nvim-telescope/telescope.nvim",
+    tag = "0.1.8",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope-fzy-native.nvim",
     },
-    {
-        "nvim-telescope/telescope.nvim",
-        tag = "0.1.5",
-        dependencies = { "nvim-lua/plenary.nvim" },
-        config = function()
-            require("telescope").setup({
-                extensions = {
-                    ["ui-select"] = {
-                        require("telescope.themes").get_dropdown({}),
-                    },
-                },
-            })
-            local builtin = require("telescope.builtin")
-            vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
-            vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
-            vim.keymap.set('n', '<C-p>', builtin.git_files, {})
-            vim.keymap.set('n', '<leader>pws', function()
-                local word = vim.fn.expand("<cword>")
-                builtin.grep_string({ search = word })
-            end)
-            vim.keymap.set('n', '<leader>pWs', function()
-                local word = vim.fn.expand("<cWord>")
-                builtin.grep_string({ search = word })
-            end)
-            vim.keymap.set('n', '<leader>ps', function()
-                builtin.grep_string({ search = vim.fn.input("Grep > ") })
-            end)
-            vim.api.nvim_set_keymap('n', '<leader>f', "<cmd>lua require('telescope.builtin').commands()<CR>", { noremap = true, silent = true })
-            vim.keymap.set('n', '<leader>vh', builtin.help_tags, {})
-            require("telescope").load_extension("ui-select")
-        end,
-    },
-    {
-        "debugloop/telescope-undo.nvim",
-        dependencies = { -- note how they're inverted to above example
-            {
-                "nvim-telescope/telescope.nvim",
-                dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      -- Check for fd (a fast file search tool)
+      local has_fd = vim.fn.executable("fd") == 1
+
+      -- List of file extensions considered as "text files"
+      local text_extensions = {
+        "txt", "md", "rst", "c", "cpp", "cc", "cxx", "h", "hpp", "hh",
+        "py", "rb", "rs", "go", "js", "ts", "lua", "sh", "bash", "zsh",
+        "fish", "conf", "cfg", "ini", "yaml", "yml", "toml", "json", "vim",
+        "el", "css", "html", "xml"
+      }
+
+      local find_command = {}
+      if has_fd then
+        -- Build the fd command with specified extensions
+        find_command = { "fd", "--type", "f", "--hidden", "--follow" }
+        for _, ext in ipairs(text_extensions) do
+          table.insert(find_command, "-e")
+          table.insert(find_command, ext)
+        end
+      else
+        -- Fallback to find if fd is not available
+        find_command = { "find", vim.fn.getcwd(), "-type", "f", "(" }
+        local first = true
+        for _, ext in ipairs(text_extensions) do
+          if not first then
+            table.insert(find_command, "-o")
+          end
+          first = false
+          table.insert(find_command, "-name")
+          table.insert(find_command, "*." .. ext)
+        end
+        table.insert(find_command, ")")
+      end
+
+      -- Determine search directory:
+      -- If the current buffer is netrw, use its directory (vim.b.netrw_curdir).
+      -- Otherwise, use the current working directory.
+      local search_dir = vim.fn.getcwd()
+      local cur_ft = vim.api.nvim_buf_get_option(0, "filetype")
+      if cur_ft == "netrw" and vim.b.netrw_curdir then
+        search_dir = vim.b.netrw_curdir
+      end
+
+      local actions = require("telescope.actions")
+      require("telescope").setup({
+        defaults = {
+          prompt_prefix = "> ",
+          selection_caret = "> ",
+          path_display = { "truncate" },
+          mappings = {
+            i = {
+              ["<esc>"] = actions.close,
+              ["<C-u>"] = false, -- Allow clearing the prompt
             },
+          },
         },
-        keys = {
-            { -- lazy style key map
-                "<leader>u",
-                "<cmd>Telescope undo<cr>",
-                desc = "undo history",
-            },
+        pickers = {
+          find_files = {
+            search_dirs = { search_dir },
+            hidden = true,
+            find_command = find_command,
+          },
         },
-        opts = {
-            extensions = {
-                undo = {
-                    side_by_side = true,
-                    layout_strategy = "vertical",
-                    layout_config = {
-                        preview_height = 0.8,
-                    },
-                },
-            },
-        },
-        config = function(_, opts)
-            -- Calling telescope's setup from multiple specs does not hurt, it will happily merge the
-            -- configs for us. We won't use data, as everything is in it's own namespace (telescope
-            -- defaults, as well as each extension).
-            require("telescope").setup(opts)
-            require("telescope").load_extension("undo")
-        end,
-    },
-    --{
-    --    vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>")
-    --}
+      })
+
+      -- Load the native fuzzy sorter for performance
+      require("telescope").load_extension("fzy_native")
+
+      -- Keybindings
+      vim.keymap.set("n", "<leader>pf", require("telescope.builtin").find_files, { desc = "Find text files" })
+      vim.keymap.set("n", "<leader>pg", require("telescope.builtin").live_grep, { desc = "Fuzzy grep" })
+      vim.keymap.set("n", "<leader>pb", require("telescope.builtin").buffers, { desc = "List buffers" })
+      vim.keymap.set("n", "<leader>ph", require("telescope.builtin").help_tags, { desc = "Help tags" })
+    end,
+  },
 }
+
