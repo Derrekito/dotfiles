@@ -3,18 +3,70 @@ return {
   config = function()
     local g = vim.g
 
-    -- Example: other configurations
-    --g.ale_ruby_rubocop_auto_correct_all = 1
-
-    -- Configure ALE linters for different filetypes
+    -- Linters for all filetypes, including CUDA
     g.ale_linters = {
+      -- Lua
+      lua = { 'luacheck' },
+
+      -- Make
+      make = { 'checkmake' },
+
+      -- CMake
+      cmake = { 'cmakelint' },
+
+      -- C/C++
+      c = { 'cppcheck', 'clang' },
+      cpp = { 'cppcheck', 'clang' },
+
+      -- CUDA
+      cuda = { 'nvcc', 'clang' }, -- nvcc for CUDA-specific, clang for extra checks
+
+      -- Python
+      python = { 'flake8', 'pylint' },
+
+      -- Ruby
       ruby = { 'rubocop', 'ruby' },
-      lua = { 'lua_language_server' },
-      make = { 'checkmake' },  -- Use checkmake for Makefiles
+
+      -- JavaScript/TypeScript
+      javascript = { 'eslint' },
+      typescript = { 'eslint', 'tsserver' },
+
+      -- Bash/Shell
+      sh = { 'shellcheck' },
+
+      -- Markdown
+      markdown = { 'markdownlint' },
+
+      -- Rust
+      rust = { 'cargo' },
+
+      -- Go
+      go = { 'golangci-lint' },
+
+      -- Java
+      java = { 'checkstyle' },
     }
 
-    -- Optional: run linting when leaving insert mode and on text changes
+    -- Customize nvcc for CUDA linting
+    g.ale_cuda_nvcc_options = '-Xcompiler -Wall -Wextra' -- Extra warnings
+
+    -- Your triggers
     g.ale_lint_on_insert_leave = 1
     g.ale_lint_on_text_changed = 'always'
-  end
+
+    -- Fixers (no CUDA-specific fixer, reusing C++)
+    g.ale_fixers = {
+      python = { 'black', 'isort' },
+      c = { 'clang-format' },
+      cpp = { 'clang-format' },
+      cuda = { 'clang-format' }, -- Works if clang supports CUDA
+      javascript = { 'prettier' },
+      typescript = { 'prettier' },
+      markdown = { 'prettier' },
+      rust = { 'rustfmt' },
+      go = { 'gofmt' },
+    }
+    g.ale_fix_on_save = 1
+  end,
 }
+

@@ -148,10 +148,10 @@ vim.opt.hlsearch = true
 setkey("n", "<esc>", ":nohlsearch<CR>")
 
 -- Diagnostic Keymaps
-setkey("n", "<leader>dn", vim.diagnostic.goto_next, {desc="Go to next diagnostic"})
-setkey("n", "<leader>dp", vim.diagnostic.goto_prev, {desc="Go to previous diagnostic"})
-setkey("n", "<leader>e", vim.diagnostic.open_float, {desc="Open diagnostics [E]rror message"})
-setkey("n", "<leader>q", vim.diagnostic.setloclist, {desc="Open diagnostics [Q]uickfix list"})
+setkey("n", "<leader>dn", vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
+setkey("n", "<leader>dp", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
+setkey("n", "<leader>e", vim.diagnostic.open_float, { desc = "Open diagnostics [E]rror message" })
+setkey("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostics [Q]uickfix list" })
 
 -- OSC 52 function to copy to local clipboard
 local function osc52_yank()

@@ -1,6 +1,6 @@
 return {
   "tpope/vim-fugitive",
-  name="fugitive",
+  name = "fugitive",
   config = function()
     vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
 
@@ -16,7 +16,7 @@ return {
         end
 
         local bufnr = vim.api.nvim_get_current_buf()
-        local opts = {buffer = bufnr, remap = false}
+        local opts = { buffer = bufnr, remap = false }
 
         -- push
         vim.keymap.set("n", "<leader>p", function()
@@ -30,11 +30,11 @@ return {
 
         -- log
         vim.keymap.set("n", "<leader>l", function()
-          vim.cmd.Git('git log --pretty=format:"%C(yellow)%h %<(24)%C(red)%ad %<(18)%C(green)%an %C(reset)%s" --date=local --max-count=10')
+          vim.cmd.Git(
+            'git log --pretty=format:"%C(yellow)%h %<(24)%C(red)%ad %<(18)%C(green)%an %C(reset)%s" --date=local --max-count=10')
         end, opts)
       end
     })
     vim.o.statusline = '%<%f %h%m%r%=%-14.(%l,%c%V%) %P %{FugitiveStatusline()}'
   end
 }
-

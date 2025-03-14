@@ -46,8 +46,8 @@ return {
                     globals = { 'vim', 'bufnr' },
                   },
                   workspace = {
-                    library = vim.api.nvim_get_runtime_file("", true),       -- include nvim runtime files
-                    checkThirdParty = false,                                 -- avoid unecessary prompts?
+                    library = vim.api.nvim_get_runtime_file("", true), -- include nvim runtime files
+                    checkThirdParty = false,                           -- avoid unecessary prompts?
                   },
                   telemetry = { enable = false },
                 },
@@ -119,6 +119,15 @@ return {
       vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
       vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
       vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
+    end,
+  },
+  {
+    "folke/neodev.nvim", -- Add this
+    lazy = false,
+    config = function()
+      require("neodev").setup({
+        library = { plugins = { "nvim-treesitter" }, types = true },
+      })
     end,
   },
 }

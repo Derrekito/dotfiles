@@ -3,8 +3,8 @@ return {
   lazy = false,
   config = function()
     require("type-anim").setup({
-      AnimToggleKey="<space>",
-      AnimKillKey="<C-C>"
+      AnimToggleKey = "<space>",
+      AnimKillKey = "<C-C>"
     })
   end
 }

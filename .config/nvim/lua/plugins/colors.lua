@@ -6,7 +6,7 @@ return {
       dark_variant = 'main',
       bold_vert_split = false,
       dim_nc_background = false,
-      disable_background = true,  -- Keeps transparency or terminal background
+      disable_background = true, -- Keeps transparency or terminal background
       disable_float_background = false,
       disable_italics = false,
       groups = {
@@ -38,7 +38,7 @@ return {
         Search = { bg = 'gold', inherit = false },
         -- Make inactive window background darker
         -- NormalNC = { bg = "#1a1826" },  -- Darker for inactive panes
-        NormalNC = { bg = "#1f1d2e" },  -- Actually darker than active background
+        NormalNC = { bg = "#1f1d2e" }, -- Actually darker than active background
       }
     })
     vim.cmd('colorscheme rose-pine')

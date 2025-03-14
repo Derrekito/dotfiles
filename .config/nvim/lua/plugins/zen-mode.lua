@@ -16,7 +16,7 @@ return {
         -- uncomment any of the options below, or add other vim.wo options you want to apply
         options = {
           -- signcolumn = "no", -- disable signcolumn
-          number = true, -- disable number column
+          number = true,         -- disable number column
           relativenumber = true, -- disable relative numbers
           -- cursorline = false, -- disable cursorline
           -- cursorcolumn = false, -- disable cursor column
@@ -29,15 +29,15 @@ return {
         -- comment the lines to not apply the options
         options = {
           enabled = true,
-          ruler = false, -- disables the ruler text in the cmd line area
+          ruler = false,   -- disables the ruler text in the cmd line area
           showcmd = false, -- disables the command in the last line of the screen
           -- you may turn on/off statusline in zen mode by setting 'laststatus'
           -- statusline will be shown only if 'laststatus' == 3
-          laststatus = 0, -- turn off the statusline in zen mode
+          laststatus = 0,               -- turn off the statusline in zen mode
         },
-        twilight = { enabled = true }, -- enable to start Twilight when zen mode opens
+        twilight = { enabled = true },  -- enable to start Twilight when zen mode opens
         gitsigns = { enabled = false }, -- disables git signs
-        tmux = { enabled = true }, -- enables the tmux statusline handling
+        tmux = { enabled = true },      -- enables the tmux statusline handling
         -- this will change the font size on kitty when in zen mode
         -- to make this work, you need to set the following kitty options:
         -- - allow_remote_control socket-only
@@ -87,7 +87,7 @@ return {
         -- Remove keybindings if necessary
         vim.api.nvim_buf_del_keymap(0, 'n', 'C-<left>')
         vim.api.nvim_buf_del_keymap(0, 'n', 'C-<right>')
-      end,   -- refer to the configuration section below
+      end, -- refer to the configuration section below
     }
     require("zen-mode").toggle()
   end)
