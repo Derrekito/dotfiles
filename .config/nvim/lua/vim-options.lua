@@ -1,9 +1,9 @@
 -- Function to setup smarter indentation with word wrapping
 local function setup_smart_indentation_wrapping()
-    vim.wo.wrap = true
-    vim.wo.linebreak = true
-    vim.wo.breakindent = true
-    vim.wo.breakindentopt = "shift:2"
+  vim.wo.wrap = true
+  vim.wo.linebreak = true
+  vim.wo.breakindent = true
+  vim.wo.breakindentopt = "shift:2"
 end
 
 -- Call the function to apply settings
@@ -13,9 +13,9 @@ vim.wo.cursorline = true
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 
 vim.opt.smartindent = true
@@ -51,9 +51,9 @@ vim.opt.clipboard:append("unnamedplus")
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "make",
   callback = function()
-      vim.opt_local.tabstop = 8
-      vim.opt_local.shiftwidth = 8
-      vim.opt_local.expandtab = false
+    vim.opt_local.tabstop = 8
+    vim.opt_local.shiftwidth = 8
+    vim.opt_local.expandtab = false
   end,
 })
 
