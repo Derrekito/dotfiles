@@ -1,10 +1,10 @@
--- ~/.config/nvim/lua/plugins/nvim-tree.lua
+-- ~/.config/nvim/lua/plugins/tree.lua
 
 return {
   {
     "nvim-tree/nvim-tree.lua",
-    version = "*", -- Optional: pins to latest version
-    lazy = false, -- Load immediately to overwrite <leader>pv
+    version = "*",                   -- Optional: pins to latest version
+    lazy = false,                    -- Load immediately to overwrite <leader>pv
     dependencies = {
       "nvim-tree/nvim-web-devicons", -- Optional: for file icons
     },
@@ -47,7 +47,7 @@ return {
         },
         actions = {
           open_file = {
-            quit_on_open = false,
+            quit_on_open = true,
           },
         },
       })

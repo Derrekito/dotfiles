@@ -57,7 +57,8 @@ alias vim='nvim'
 alias v='nvim'
 alias mkdir='mkdir -pv'
 alias ccat='highlight --out-format=ansi'
-alias tmux='tmux attach || tmux new-session'
+#alias tmux='tmux attach || tmux new-session'
+alias tmux='tmux attach'
 alias resolve='LD_PRELOAD="/usr/lib/libgio-2.0.so /usr/lib/libgmodule-2.0.so" /opt/resolve/bin/resolve'
 
 # Git aliases

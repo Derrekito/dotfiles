@@ -2,6 +2,18 @@ local setkey = vim.keymap.set
 
 vim.g.mapleader = " "
 
+-- Prevent <CR> from doing anything unexpected globally
+vim.keymap.set("n", "<CR>", "<nop>", { desc = "Disable default <CR>" })
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "help",
+  callback = function()
+    print("Help filetype detected!")
+    vim.keymap.set("n", "<CR>", "<C-]>", { buffer = true, desc = "Jump to tag under cursor" })
+  end,
+})
+
+
 -- Increase font size
 setkey("n", "<leader>+", ":hi! Normal guifont+=1<CR>")
 
@@ -83,24 +95,24 @@ setkey("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 --end)
 
 local function setNetrwKeymap()
-    if vim.bo.filetype == "netrw" then
-        vim.keymap.set("n", "<leader><leader>", ":TypeAnim<CR>", { buffer = true })
-    else
-        -- source file
-        vim.keymap.set("n", "<leader><leader>", function()
-            vim.cmd("so")
-        end)
-    end
+  if vim.bo.filetype == "netrw" then
+    vim.keymap.set("n", "<leader><leader>", ":TypeAnim<CR>", { buffer = true })
+  else
+    -- source file
+    vim.keymap.set("n", "<leader><leader>", function()
+      vim.cmd("so")
+    end)
+  end
 end
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "netrw",
-    callback = setNetrwKeymap
+  pattern = "netrw",
+  callback = setNetrwKeymap
 })
 
 vim.api.nvim_create_autocmd("BufLeave", {
-    pattern = "*",
-    callback = setNetrwKeymap
+  pattern = "*",
+  callback = setNetrwKeymap
 })
 -- Select All
 setkey("n", "<C-a>", "gg<S-v>G")
@@ -136,46 +148,46 @@ vim.opt.hlsearch = true
 setkey("n", "<esc>", ":nohlsearch<CR>")
 
 -- Diagnostic Keymaps
-setkey("n", "<leader>dn", vim.diagnostic.goto_next, {desc="Go to next diagnostic"})
-setkey("n", "<leader>dp", vim.diagnostic.goto_prev, {desc="Go to previous diagnostic"})
-setkey("n", "<leader>e", vim.diagnostic.open_float, {desc="Open diagnostics [E]rror message"})
-setkey("n", "<leader>q", vim.diagnostic.setloclist, {desc="Open diagnostics [Q]uickfix list"})
+setkey("n", "<leader>dn", vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
+setkey("n", "<leader>dp", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
+setkey("n", "<leader>e", vim.diagnostic.open_float, { desc = "Open diagnostics [E]rror message" })
+setkey("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostics [Q]uickfix list" })
 
 -- OSC 52 function to copy to local clipboard
 local function osc52_yank()
-    -- Get the yanked text from register 0
-    local yanked_text = vim.fn.getreg('0')
-    if not yanked_text or yanked_text == '' then
-        print("Nothing to yank to clipboard")
-        return
-    end
+  -- Get the yanked text from register 0
+  local yanked_text = vim.fn.getreg('0')
+  if not yanked_text or yanked_text == '' then
+    print("Nothing to yank to clipboard")
+    return
+  end
 
-    -- Base64 encode it
-    local buffer = vim.fn.system('base64 -w0', yanked_text)
-    if vim.v.shell_error ~= 0 or not buffer then
-        print("Error: base64 failed or not installed")
-        return
-    end
+  -- Base64 encode it
+  local buffer = vim.fn.system('base64 -w0', yanked_text)
+  if vim.v.shell_error ~= 0 or not buffer then
+    print("Error: base64 failed or not installed")
+    return
+  end
 
-    -- Trim trailing newlines from base64 output
-    buffer = buffer:gsub('%s+$', '')
+  -- Trim trailing newlines from base64 output
+  buffer = buffer:gsub('%s+$', '')
 
-    -- Build OSC 52 sequence
-    local osc52 = '\x1b]52;c;' .. buffer .. '\x07'
+  -- Build OSC 52 sequence
+  local osc52 = '\x1b]52;c;' .. buffer .. '\x07'
 
-    -- Write to stdout instead of /dev/tty
-    io.stdout:write(osc52)
-    io.stdout:flush() -- Ensure it sends immediately
+  -- Write to stdout instead of /dev/tty
+  io.stdout:write(osc52)
+  io.stdout:flush() -- Ensure it sends immediately
 end
 
 -- Keep your autocommand as-is
 vim.api.nvim_create_autocmd('TextYankPost', {
-    group = vim.api.nvim_create_augroup('Osc52Clipboard', { clear = true }),
-    callback = function()
-        if vim.v.event.operator == 'y' then
-            osc52_yank()
-        end
-    end,
+  group = vim.api.nvim_create_augroup('Osc52Clipboard', { clear = true }),
+  callback = function()
+    if vim.v.event.operator == 'y' then
+      osc52_yank()
+    end
+  end,
 })
 
 -- Optional: Map + register to clipboard
