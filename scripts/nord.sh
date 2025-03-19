@@ -5,7 +5,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 ARG="$1"
 CMD='sudo nordvpn'
 #LOCATION='cyprus'
-LOCATION='estonia'
+LOCATION='albania'
 TOKEN=$(cat $DIR/.nord_token)
 
 function disconnect(){

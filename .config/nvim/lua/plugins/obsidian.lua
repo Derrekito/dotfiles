@@ -8,17 +8,20 @@ return {
   },
   opts = {
     workspaces = {
-      { name = "personal", path = "~/vaults/personal" },
-      { name = "work",     path = "~/vaults/work" },
+      { name = "personal",  path = "~/vaults/personal" },
+      { name = "work",      path = "~/vaults/work" },
+      { name = "templates", path = "~/vaults/Templates" },
     },
+    -- Moved from completion to top-level
+    new_notes_location = "current_dir", -- Create new notes in current directory
+    preferred_link_style = "markdown",  -- Use Markdown-style links (e.g., [note](path))
     completion = {
-      nvim_cmp = true,
-      min_chars = 2,
-      new_notes_location = "current_dir",
-      preferred_link_style = "markdown",
-      prepend_note_id = true,
-      prepend_note_path = false,
-      use_path_only = false,
+      nvim_cmp = true,                  -- Enable nvim-cmp integration
+      min_chars = 2,                    -- Trigger completion after 2 characters
+      wiki_link_func = function(opts)
+        -- Mimics prepend_note_id = true behavior
+        return require("obsidian").util.wiki_link_id_prefix(opts)
+      end,
     },
     -- Remove mappings from opts; we'll handle them manually
   },
