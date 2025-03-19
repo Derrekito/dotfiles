@@ -8,8 +8,21 @@ return {
         return
       end
 
+      -- Define the tmux parser with the right repo
+      local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+      parser_config.tmux = {
+        install_info = {
+          url = "https://github.com/Freed-Wu/tree-sitter-tmux.git",
+          files = { "src/parser.c" },
+          branch = "main",
+          generate_requires_npm = false,
+          requires_generate_from_grammar = false,
+        },
+        filetype = "tmux",
+      }
+
       configs.setup {
-        ensure_installed = { "javascript", "typescript", "c", "lua", "rust", "vim", "vimdoc", "query", "latex", "markdown", "markdown_inline", "make", "cuda" },
+        ensure_installed = { "javascript", "typescript", "c", "lua", "rust", "vim", "vimdoc", "query", "latex", "markdown", "markdown_inline", "make", "cuda", "tmux" },
         sync_install = false,
         auto_install = true,
         ignore_install = {},
@@ -30,8 +43,6 @@ return {
           disable = {},
         },
       }
-
-      local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
     end,
   },
 }

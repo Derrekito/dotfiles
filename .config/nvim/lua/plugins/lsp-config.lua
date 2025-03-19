@@ -52,6 +52,7 @@ return {
                 },
               }
             elseif server_name == "pylsp" then
+              opts.cmd = { vim.fn.expand("~/.venvs/nvim/bin/pylsp") }
               opts.settings = {
                 pylsp = {
                   plugins = {
