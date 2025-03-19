@@ -16,7 +16,7 @@ set -o vi
 # infinite history
 HISTSIZE=HISTFILESIZE=
 
-ANTHROPIC_API_KEY="$(cat ~/.market/ant_key)"
+#ANTHROPIC_API_KEY="$(cat ~/.market/ant_key)"
 export ANTHROPIC_API_KEY
 
 # Environment Variables and Terminal Settings
@@ -87,3 +87,7 @@ fi
 eval "$(starship init bash)"
 
 
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
