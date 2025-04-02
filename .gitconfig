@@ -1,23 +1,72 @@
-[user]
-	email = Derrekito@users.noreply.github.com
-	name = Derrek Landauer
+# ~/.gitconfig - Main Git configuration file
+# This configuration manages repository-specific settings and global preferences
+
+# Include repository-specific configurations based on remote URL
+[includeIf "hasconfig:remote.*.url:git@gitlab.dle.afrl.af.mil:*/**"]
+  path = ~/.gitconfig-dle    # DLE-specific Git settings
+
+[includeIf "hasconfig:remote.*.url:git@github.com:*/**"]
+  path = ~/.gitconfig-github # GitHub-specific Git settings
+
+# Core Git settings
 [core]
-	editor = nvim
-	excludesfile = ~/.gitignore
-	preloadIndex = true
+  editor = nvim              # Use Neovim as the default text editor for commit messages
+  excludesfile = ~/.gitignore # Global gitignore file location
+  preloadIndex = true        # Preload index for improved performance
+  untrackedCache = true      # Speed up git status by caching untracked files
+  fsmonitor = true           # Use filesystem monitor to speed up git status (Git 2.37+)
+
+# Enable Git's reuse recorded resolution feature
+# This remembers how you resolved conflicts so you don’t have to resolve them again
 [rerere]
-	enabled = true
+  enabled = true
+
+# Display settings for Git’s columnated output
 [column]
-	ui = row
+  ui = row                   # Display Git status in row format
+
+# Branch settings
 [branch]
-	sort = -committerdate
+  sort = -committerdate      # Sort branches by most recently committed
+  autosetuprebase = always   # Always set up new branches to rebase when pulling
+
+# Automatic repository maintenance settings
 [maintenance]
-	repo = /home/derrekito/Projects/RADCAST
+  auto = true                # Enable automatic maintenance tasks like gc, prefetch
+  strategy = incremental     # Use incremental maintenance strategy
+
+# Settings for new repositories
 [init]
-	defaultBranch = master
+  defaultBranch = main       # Use 'main' as the default branch name for new repositories
+
+# Pull settings
 [pull]
-	rebase = true
+  rebase = true              # Use rebase instead of merge when pulling changes
+
+# Fetch settings
+[fetch]
+  prune = true               # Automatically prune deleted remote branches
+  parallel = 0               # Use as many connections as possible when fetching
+
+# Status settings
+[status]
+  showUntrackedFiles = all   # Show all untracked files, not just directories
+  submodulesummary = true    # Include submodule summary in status output
+
+# Diff settings to improve speed and usability
+[diff]
+  algorithm = patience       # Use patience diff algorithm for better results
+  compactionHeuristic = true # Improve readability of diffs
+
+# Custom aliases for Git worktree commands and more
 [alias]
-	wta = worktree add
-	wtl = worktree list
-	wtr = worktree remove
+  wta = worktree add         # Shortcut for adding a new worktree
+  wtl = worktree list        # Shortcut for listing all worktrees
+  wtr = worktree remove      # Shortcut for removing a worktree
+  s = status -sb             # Short status with branch info
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' # Pretty log output
+  amend = commit --amend --no-edit # Amend previous commit without editing message
+  unstage = reset HEAD --    # Unstage files
+  last = log -1 HEAD         # Show last commit
+  contributors = shortlog -s -n # Show contributors ordered by number of commits
+  aliases = config --get-regexp alias # List all aliases

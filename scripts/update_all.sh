@@ -44,20 +44,21 @@ function update_arch {
 
 # Function to update AUR packages with automation
 function update_aur {
-    if [ -d "$aur_package_dir" ]; then
-        log "Updating AUR packages in $aur_package_dir..."
-        # Automatically clean build only for packages with issues
-        yay -Syu --noconfirm --cleanafter --answerclean=ask --answerdiff=None --builddir="$aur_package_dir" 2>&1 | tee -a "$log_file"
+  if [ -d "$aur_package_dir" ]; then
+    log "Updating AUR packages in $aur_package_dir..."
+    # Set CMAKE_ARGS to include the compatibility flag
+    export CMAKE_ARGS="-DCMAKE_POLICY_VERSION_MINIMUM=3.5"
+    yay -Syu --noconfirm --cleanafter --answerclean=ask --answerdiff=None --builddir="$aur_package_dir" 2>&1 | tee -a "$log_file"
 
-        # Check the exit status of yay
-        if [ "${PIPESTATUS[0]}" != 0 ]; then
-            log "Error: AUR update failed. Check the log for details."
-            exit 1
-        fi
-        log "AUR packages updated."
-    else
-        log "AUR directory $aur_package_dir does not exist."
+    # Check the exit status of yay
+    if [ "${PIPESTATUS[0]}" != 0 ]; then
+      log "Error: AUR update failed. Check the log for details."
+      exit 1
     fi
+    log "AUR packages updated."
+  else
+    log "AUR directory $aur_package_dir does not exist."
+  fi
 }
 
 # Main script execution

@@ -15,6 +15,7 @@ return {
       })
     end
   },
+
   {
     "williamboman/mason-lspconfig.nvim",
     dependencies = {
@@ -24,11 +25,12 @@ return {
     lazy = false,
     config = function()
       require("mason-lspconfig").setup {
-        ensure_installed = { 'clangd', 'rust_analyzer', 'bashls', 'lua_ls', 'marksman', 'pylsp', 'jsonls', 'texlab' },
+        ensure_installed = { 'clangd', 'rust_analyzer', 'bashls', 'lua_ls', 'marksman', 'pylsp', 'jsonls', 'texlab', 'omnisharp' },
         automatic_installation = true,
         handlers = {
           function(server_name)
-            local opts = {} -- Initialize server-specific options
+            local opts = {}
+
             if server_name == "clangd" then
               opts.cmd = {
                 "clangd",
@@ -39,31 +41,49 @@ return {
                 "--header-insertion-decorators"
               }
             elseif server_name == "lua_ls" then
-              -- Special setup for lua_ls
               opts.settings = {
                 Lua = {
-                  diagnostics = {
-                    globals = { 'vim', 'bufnr' },
-                  },
+                  diagnostics = { globals = { 'vim', 'bufnr' } },
                   workspace = {
-                    library = vim.api.nvim_get_runtime_file("", true), -- include nvim runtime files
-                    checkThirdParty = false,                           -- avoid unecessary prompts?
+                    library = vim.api.nvim_get_runtime_file("", true),
+                    checkThirdParty = false,
                   },
                   telemetry = { enable = false },
                 },
               }
             elseif server_name == "pylsp" then
-              -- Add configuration for pylsp
               opts.settings = {
                 pylsp = {
                   plugins = {
-                    pycodestyle = {
-                      maxLineLength = 140, -- Set maximum line length
-                    },
+                    pycodestyle = { maxLineLength = 140 },
                   },
                 },
               }
+            elseif server_name == "omnisharp" then
+              opts.cmd = {
+                "env", "VINTAGE_STORY=" .. os.getenv("VINTAGE_STORY"),
+                "dotnet",
+                vim.fn.stdpath("data") .. "/mason/packages/omnisharp/libexec/OmniSharp.dll",
+                "--languageserver",
+                "--hostPID", tostring(vim.fn.getpid())
+              }
+              opts.settings = {
+                omnisharp = {
+                  useGlobalMono = "always",
+                  enableRoslynAnalyzers = true,
+                  enableEditorConfigSupport = true,
+                  analyzeOpenDocumentsOnly = false,
+                  MsBuild = {
+                    LoadProjectsOnDemand = false,
+                    ProvideSearchPaths = true,
+                  },
+                  FormattingOptions = {
+                    EnableEditorConfigSupport = true
+                  }
+                }
+              }
             end
+
             require("lspconfig")[server_name].setup(opts)
           end,
         }
@@ -83,6 +103,7 @@ return {
       require("luasnip.loaders.from_vscode").lazy_load()
     end,
   },
+
   -- nvim-lspconfig for setting up LSP servers
   {
     "neovim/nvim-lspconfig",
@@ -102,9 +123,7 @@ return {
           local client = vim.lsp.get_client_by_id(args.data.client_id)
           if not client then return end
 
-          --@diagnostic disable-next-line: missing-parameter
           if client.supports_method('textDocument/formatting') then
-            -- Format the current buffer on save
             vim.api.nvim_create_autocmd('BufWritePre', {
               buffer = args.buf,
               callback = function()
@@ -114,15 +133,15 @@ return {
           end
         end,
       })
-      -- Key mappings for LSP functionalities
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
       vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
       vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
       vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
     end,
   },
+
   {
-    "folke/neodev.nvim", -- Add this
+    "folke/neodev.nvim",
     lazy = false,
     config = function()
       require("neodev").setup({
@@ -131,3 +150,4 @@ return {
     end,
   },
 }
+

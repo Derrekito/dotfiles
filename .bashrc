@@ -81,3 +81,5 @@ fi
 eval "$(starship init bash)"
 
 
+. "$HOME/.cargo/env"
+source /home/derrekito/Projects/alacritty/extra/completions/alacritty.bash

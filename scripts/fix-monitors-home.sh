@@ -15,8 +15,8 @@ CENTER='DP-0'
 #xrandr --output $LEFT --left-of $CENTER --auto
 #xrandr --output $RIGHT --right-of $CENTER --auto
 
-xrandr --output HDMI-0 --auto --left-of eDP-1-1
-xrandr --output eDP-1-1 --off
+xrandr --output HDMI-0 --auto --right-of eDP-1-1
+#xrandr --output eDP-1-1 --off
 
 xset s off
 xset -dpms
